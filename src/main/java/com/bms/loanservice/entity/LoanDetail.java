@@ -17,9 +17,9 @@ public class LoanDetail extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
 	private long loanId;
-	
-	@Column
-	private long customerId;
+
+//	@Column
+//	private long customerId;
 
 	@OneToOne
 	private LoanTypeMaster loanTypeMaster;
@@ -38,10 +38,9 @@ public class LoanDetail extends BaseEntity {
 
 	public LoanDetail(){}
 
-	public LoanDetail(long customerId, LoanTypeMaster loanTypeMaster, double loanAmount, Date loanDate,
+	public LoanDetail(LoanTypeMaster loanTypeMaster, double loanAmount, Date loanDate,
 			double interestRate, int loanDuration) {
 		super();
-		this.customerId = customerId;
 		this.loanTypeMaster = loanTypeMaster;
 		this.loanAmount = loanAmount;
 		this.loanDate = loanDate;
@@ -57,13 +56,13 @@ public class LoanDetail extends BaseEntity {
 		this.loanId = loanId;
 	}
 
-	public long getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(long customerId) {
-		this.customerId = customerId;
-	}
+//	public long getCustomerId() {
+//		return customerId;
+//	}
+//
+//	public void setCustomerId(long customerId) {
+//		this.customerId = customerId;
+//	}
 
 	public LoanTypeMaster getLoanTypeMaster() {
 		return loanTypeMaster;
@@ -107,7 +106,7 @@ public class LoanDetail extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "LoanDetail [loanId=" + loanId + ", customerId=" + customerId + ", loanTypeMaster=" + loanTypeMaster
+		return "LoanDetail [loanId=" + loanId + ", loanTypeMaster=" + loanTypeMaster
 				+ ", loanAmount=" + loanAmount + ", loanDate=" + loanDate + ", intrestRate=" + interestRate
 				+ ", loanDuration=" + loanDuration + "]";
 	}
