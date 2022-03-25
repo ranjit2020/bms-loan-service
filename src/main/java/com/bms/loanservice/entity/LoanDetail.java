@@ -16,7 +16,7 @@ public class LoanDetail extends BaseEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
-	private long loanId;
+	private long id;
 
 //	@Column
 //	private long customerId;
@@ -49,11 +49,11 @@ public class LoanDetail extends BaseEntity {
 	}
 
 	public long getLoanId() {
-		return loanId;
+		return id;
 	}
 
 	public void setLoanId(long loanId) {
-		this.loanId = loanId;
+		this.id = loanId;
 	}
 
 //	public long getCustomerId() {
@@ -106,7 +106,7 @@ public class LoanDetail extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "LoanDetail [loanId=" + loanId + ", loanTypeMaster=" + loanTypeMaster
+		return "LoanDetail [loanId=" + id + ", loanTypeMaster=" + loanTypeMaster
 				+ ", loanAmount=" + loanAmount + ", loanDate=" + loanDate + ", intrestRate=" + interestRate
 				+ ", loanDuration=" + loanDuration + "]";
 	}

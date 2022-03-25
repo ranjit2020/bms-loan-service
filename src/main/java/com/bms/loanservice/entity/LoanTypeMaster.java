@@ -13,27 +13,27 @@ public class LoanTypeMaster extends BaseEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
-	private int loanId;
+	private int id;
 	
 	@Column(unique = true)
 	private String loanType;
 
 	public LoanTypeMaster(){}
 
-	public LoanTypeMaster(int loanId, String loanType) {
+	public LoanTypeMaster( String loanType) {
 		super();
-		this.loanId = loanId;
+//		this.loanId = loanId;
 		this.loanType = loanType;
 	}
 
 
 	public int getLoanId() {
-		return loanId;
+		return id;
 	}
 
 
 	public void setLoanId(int loanId) {
-		this.loanId = loanId;
+		this.id = loanId;
 	}
 
 
@@ -48,7 +48,7 @@ public class LoanTypeMaster extends BaseEntity{
 	
 	@Override
 	public String toString() {
-		return "LoanTypeMaster [loanId=" + loanId + ", loanType=" + loanType + "]";
+		return "LoanTypeMaster [loanId=" + id + ", loanType=" + loanType + "]";
 	}
 
 

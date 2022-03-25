@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface LoanDetailRepository extends JpaRepository<LoanDetail, Long> {
 
-    List<LoanDetail> findAllByLoanIdAndCreatedBy(long loanId, String createdBy, Pageable pageable);
+    List<LoanDetail> findAllByIdAndCreatedBy(long loanId, String createdBy, Pageable pageable);
 
 }
