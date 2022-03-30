@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -14,6 +15,10 @@ import javax.persistence.Table;
 @Table(name = "LOAN_DETAIL")
 public class LoanDetail {
 	
+	public LoanDetail() {
+		super();
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	long loanId;
@@ -22,6 +27,7 @@ public class LoanDetail {
 	long customerId;
 
 	@OneToOne
+	@JoinColumn(name = "loan_type_id")
 	LoanTypeMaster loanTypeMaster;
 	
 	@Column(name = "LOAN_AMOUNT")

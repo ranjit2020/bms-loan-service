@@ -11,9 +11,12 @@ import javax.persistence.Table;
 @Table
 public class LoanTypeMaster {
 	
+	public LoanTypeMaster() {
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	int loanId;
+	int loanTypeId;
 	
 	
 	@Column
@@ -21,18 +24,18 @@ public class LoanTypeMaster {
 
 	public LoanTypeMaster(int loanId, String loanType) {
 		super();
-		this.loanId = loanId;
+		this.loanTypeId = loanId;
 		this.loanType = loanType;
 	}
 
 
 	public int getLoanId() {
-		return loanId;
+		return loanTypeId;
 	}
 
 
 	public void setLoanId(int loanId) {
-		this.loanId = loanId;
+		this.loanTypeId = loanId;
 	}
 
 
@@ -47,7 +50,7 @@ public class LoanTypeMaster {
 	
 	@Override
 	public String toString() {
-		return "LoanTypeMaster [loanId=" + loanId + ", loanType=" + loanType + "]";
+		return "LoanTypeMaster [loanTypeId=" + loanTypeId + ", loanType=" + loanType + "]";
 	}
 
 

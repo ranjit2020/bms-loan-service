@@ -8,4 +8,6 @@ import com.bms.loanservice.entity.LoanTypeMaster;
 @Repository
 public interface LoanTypeRepository extends JpaRepository<LoanTypeMaster, Integer> {
 
+	LoanTypeMaster findByLoanType(String string);
+
 }
