@@ -38,8 +38,17 @@ public class LoanDetail extends BaseEntity {
 
 	public LoanDetail(){}
 
+	public LoanDetail(long id, LoanTypeMaster loanTypeMaster, double loanAmount, Date loanDate, double interestRate, int loanDuration) {
+		this.id = id;
+		this.loanTypeMaster = loanTypeMaster;
+		this.loanAmount = loanAmount;
+		this.loanDate = loanDate;
+		this.interestRate = interestRate;
+		this.loanDuration = loanDuration;
+	}
+
 	public LoanDetail(LoanTypeMaster loanTypeMaster, double loanAmount, Date loanDate,
-			double interestRate, int loanDuration) {
+					  double interestRate, int loanDuration) {
 		super();
 		this.loanTypeMaster = loanTypeMaster;
 		this.loanAmount = loanAmount;

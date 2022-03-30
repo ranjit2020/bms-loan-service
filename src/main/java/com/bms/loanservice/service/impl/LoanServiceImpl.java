@@ -1,16 +1,22 @@
 package com.bms.loanservice.service.impl;
 
 import com.bms.loanservice.common.APIResponse;
+import com.bms.loanservice.entity.LoanDetail;
+import com.bms.loanservice.entity.LoanTypeMaster;
 import com.bms.loanservice.repository.LoanDetailRepository;
 import com.bms.loanservice.repository.LoanTypeRepository;
 import com.bms.loanservice.service.LoanService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
+import java.util.Date;
+import java.util.List;
 
 
 @Component
@@ -29,21 +35,35 @@ public class LoanServiceImpl implements LoanService {
         this.loanTypeRepository = loanTypeRepository;
     }
 
+    @PostConstruct
+    public void postConstruct(){
+        LoanTypeMaster loanTypeMaster = new LoanTypeMaster("PL");
+        loanTypeMaster.setCreatedBy("sjain");
+        loanTypeMaster.setCreatedDate(new Date());
+        loanTypeRepository.save(loanTypeMaster);
+        LoanDetail loanDetail = new LoanDetail(loanTypeMaster,122.22,new Date(),10.2,2);
+        loanDetail.setLoanId(1);
+        loanDetail.setCreatedBy("sjain");
+        loanDetail.setCreatedDate(new Date());
+        loanDetailRepository.save(loanDetail);
+    }
 
     @Override
     @Transactional(readOnly = true)
-    public ResponseEntity<APIResponse> getLoans(Long id, int pageNo, int pageSize, String sortBy, String sortOrder) {
-
-        apiResponse = new APIResponse();
+    public List<LoanDetail> getLoans(Long id, int pageNo, int pageSize, String sortBy, String sortOrder) {
 
 
-        // TODO: Write Logic for getting applied loans by using pagination with help of using all the params
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize,Sort.by(Sort.Order.by(sortBy)).descending());
+
+        List<LoanDetail> loanDetails = loanDetailRepository.findAllByIdAndCreatedBy(id,"sjain",pageable);
 
 
-        return ResponseEntity
-                .status(apiResponse.getStatusCode())
-                .body(apiResponse);
+
+        return loanDetails;
     }
 
-
+    @Override
+    public List<LoanDetail> findAll() {
+        return loanDetailRepository.findAll();
+    }
 }

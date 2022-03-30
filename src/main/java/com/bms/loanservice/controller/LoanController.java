@@ -1,12 +1,16 @@
 package com.bms.loanservice.controller;
 
 import com.bms.loanservice.common.APIResponse;
+import com.bms.loanservice.entity.LoanDetail;
 import com.bms.loanservice.service.LoanService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import static org.springframework.http.MediaType.*;
 
@@ -18,6 +22,8 @@ public class LoanController {
 
 
     private final LoanService loanService;
+
+    private APIResponse apiResponse;
 
     public LoanController(LoanService loanService) {
         this.loanService = loanService;
@@ -34,7 +40,19 @@ public class LoanController {
                                                  @RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
                                                  @RequestParam(name = "sortBy", defaultValue = "id") String sortBy,
                                                  @RequestParam(name = "sortOrder", defaultValue = "desc") String sortOrder){
-        return loanService.getLoans(id,pageNo,pageSize,sortBy,sortOrder);
+
+        List<LoanDetail> loanDetails = loanService.getLoans(id,pageNo,pageSize,sortBy,sortOrder);
+        if(loanDetails.isEmpty()){
+            apiResponse = new APIResponse(HttpStatus.NOT_FOUND.value(), loanDetails,"NOT FOUND");
+            return ResponseEntity
+                    .status(apiResponse.getStatusCode())
+                    .body(apiResponse);
+        }
+
+        apiResponse = new APIResponse(HttpStatus.OK.value(), loanDetails,"SUCCESS");
+        return ResponseEntity
+                .status(apiResponse.getStatusCode())
+                .body(apiResponse);
     }
 
 

@@ -20,7 +20,12 @@ public class LoanTypeMaster extends BaseEntity{
 
 	public LoanTypeMaster(){}
 
-	public LoanTypeMaster( String loanType) {
+	public LoanTypeMaster(int id, String loanType) {
+		this.id = id;
+		this.loanType = loanType;
+	}
+
+	public LoanTypeMaster(String loanType) {
 		super();
 //		this.loanId = loanId;
 		this.loanType = loanType;
