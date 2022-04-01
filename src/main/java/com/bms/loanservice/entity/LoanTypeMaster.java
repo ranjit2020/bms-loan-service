@@ -32,12 +32,12 @@ public class LoanTypeMaster extends BaseEntity{
 	}
 
 
-	public int getLoanId() {
+	public int getId() {
 		return id;
 	}
 
 
-	public void setLoanId(int loanId) {
+	public void setId(int loanId) {
 		this.id = loanId;
 	}
 
@@ -53,7 +53,7 @@ public class LoanTypeMaster extends BaseEntity{
 	
 	@Override
 	public String toString() {
-		return "LoanTypeMaster [loanId=" + id + ", loanType=" + loanType + "]";
+		return "LoanTypeMaster [id=" + id + ", loanType=" + loanType + "]";
 	}
 
 

@@ -57,11 +57,11 @@ public class LoanDetail extends BaseEntity {
 		this.loanDuration = loanDuration;
 	}
 
-	public long getLoanId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setLoanId(long loanId) {
+	public void setId(long loanId) {
 		this.id = loanId;
 	}
 
@@ -115,7 +115,7 @@ public class LoanDetail extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "LoanDetail [loanId=" + id + ", loanTypeMaster=" + loanTypeMaster
+		return "LoanDetail [Id=" + id + ", loanTypeMaster=" + loanTypeMaster
 				+ ", loanAmount=" + loanAmount + ", loanDate=" + loanDate + ", intrestRate=" + interestRate
 				+ ", loanDuration=" + loanDuration + "]";
 	}

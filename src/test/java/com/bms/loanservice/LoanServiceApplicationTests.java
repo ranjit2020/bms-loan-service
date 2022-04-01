@@ -1,20 +1,16 @@
 package com.bms.loanservice;
 
 
-import org.junit.jupiter.api.Test;
+
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 
 @SpringBootTest
 class LoanServiceApplicationTests {
 
 
-	@Test
-	public void contextLoads() {
-		assertEquals(20,20*1);
-	}
 
 //	@Test
 //	public void testGetLoanDetails() throws Exception{
