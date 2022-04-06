@@ -2,6 +2,8 @@ package com.bms.loanservice;
 
 
 
+import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
@@ -11,6 +13,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 class LoanServiceApplicationTests {
 
 
+    @Test
+    void testDemo() throws Exception{
+
+        Assertions.assertEquals(2,(1+1));
+    }
 
 //	@Test
 //	public void testGetLoanDetails() throws Exception{

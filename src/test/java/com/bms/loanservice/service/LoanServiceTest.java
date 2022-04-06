@@ -37,10 +37,10 @@ public class LoanServiceTest {
     @Test
     public void testLoanServiceFindByIdAndCreatedBy() throws Exception{
         LoanTypeMaster loanTypeMaster = new LoanTypeMaster(1,"PL");
-        LoanDetail LOAN_DETAIL2 = new LoanDetail(2L,loanTypeMaster,122.22,new Date(),10.12,12);
-        LOAN_DETAIL2.setCreatedBy("sjain");
-        given(dao.findByIdAndCreatedBy(2L,"sjain")).willReturn(Arrays.asList(LOAN_DETAIL2));
-        List<LoanDetail> loanDetailsData = loanService.getLoans(2L,1,10,"id","desc");
+        LoanDetail LOAN_DETAIL2 = new LoanDetail(2L,1L,loanTypeMaster,102.34,new Date(),1.2,2);
+
+        given(dao.findByLoanIdAndCustomerId(2L,1L)).willReturn(Arrays.asList(LOAN_DETAIL2));
+        List<LoanDetail> loanDetailsData = loanService.getLoans(2L,1,10,"id","desc","1");
         assertEquals(1,loanDetailsData.size());
     }
 
@@ -49,12 +49,12 @@ public class LoanServiceTest {
     public void testLoanIdNotExistAndCreatedBy() throws Exception{
 
         LoanTypeMaster loanTypeMaster = new LoanTypeMaster(1,"PL");
-        LoanDetail LOAN_DETAIL2 = new LoanDetail(2L,loanTypeMaster,122.22,new Date(),10.12,12);
-        LOAN_DETAIL2.setCreatedBy("sjain");
+        LoanDetail LOAN_DETAIL2 = new LoanDetail(2L,1L,loanTypeMaster,102.34,new Date(),1.2,2);
 
-        given(dao.findByIdAndCreatedBy(1L,null)).willReturn(Arrays.asList(LOAN_DETAIL2));
 
-        List<LoanDetail> loanDetailsData = loanService.getLoans(2L,1,10,"id","desc");
+        given(dao.findByLoanIdAndCustomerId(1L,null)).willReturn(Arrays.asList(LOAN_DETAIL2));
+
+        List<LoanDetail> loanDetailsData = loanService.getLoans(2L,1,10,"id","desc","1");
 
         assertEquals(0,loanDetailsData.size());
 

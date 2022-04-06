@@ -1,6 +1,5 @@
 package com.bms.loanservice.service.impl;
 
-import com.bms.loanservice.common.APIResponse;
 import com.bms.loanservice.entity.LoanDetail;
 import com.bms.loanservice.entity.LoanTypeMaster;
 import com.bms.loanservice.repository.LoanDetailRepository;
@@ -16,12 +15,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
 
 @Component
 public class LoanServiceImpl implements LoanService {
@@ -34,36 +32,34 @@ public class LoanServiceImpl implements LoanService {
     @Autowired
     private  LoanTypeRepository loanTypeRepository;
 
-    private APIResponse apiResponse;
+//    private static final String NAME = "sjain";
 
     public LoanServiceImpl() {
         super();
     }
 
-//    public LoanServiceImpl(LoanDetailRepository loanDetailRepository, LoanTypeRepository loanTypeRepository) {
-//        this.loanDetailRepository = loanDetailRepository;
-//        this.loanTypeRepository = loanTypeRepository;
-//    }
 
-    @PostConstruct
-    @Profile("test")
-    public void postConstruct(){
-        LoanTypeMaster loanTypeMaster = new LoanTypeMaster("PL");
-        loanTypeMaster.setCreatedBy("sjain");
-        loanTypeMaster.setCreatedDate(new Date());
-        loanTypeRepository.save(loanTypeMaster);
-        LoanDetail loanDetail = new LoanDetail(loanTypeMaster,122.22,new Date(),10.2,2);
-        loanDetail.setCreatedBy("sjain");
-        loanDetail.setCreatedDate(new Date());
-        LoanDetail loanDetail1 = new LoanDetail(loanTypeMaster,102.22,new Date(),5.2,1);
-        loanDetail1.setCreatedBy("sjain");
-        loanDetail1.setCreatedDate(new Date());
-        loanDetailRepository.saveAll(Arrays.asList(loanDetail,loanDetail1));
-    }
+//    @PostConstruct
+//    @Profile("test")
+//    public void postConstruct(){
+//        LoanTypeMaster loanTypeMaster = new LoanTypeMaster(1,"PL");
+//
+//        loanTypeRepository.save(loanTypeMaster);
+//        LoanDetail loanDetail = new LoanDetail(2L,1L,loanTypeMaster,102.34,new Date(),1.2,2);
+//
+//        LoanDetail loanDetail1 = new LoanDetail(3L,1L,loanTypeMaster,102.34,new Date(),1.2,2);
+//
+//
+//        loanDetailRepository.saveAll(Arrays.asList(loanDetail,loanDetail1));
+//    }
 
     @Override
     @Transactional(readOnly = true)
-    public List<LoanDetail> getLoans(Long id, int pageNo, int pageSize, String sortBy, String sortOrder) {
+    public List<LoanDetail> getLoans(Long id, int pageNo, int pageSize, String sortBy, String sortOrder,String customerId) {
+
+        if (customerId==null){
+            throw new IllegalStateException("Illegal Access");
+        }
 
         List<LoanDetail> loanDetails;
 
@@ -79,13 +75,13 @@ public class LoanServiceImpl implements LoanService {
                 pageable = PageRequest.of(pageNo - 1, pageSize, Sort.by(Sort.Order.by(sortBy)).descending());
             }
 
-            loanDetails = loanDetailRepository.findAllByCreatedBy("sjain", pageable);
+            loanDetails = loanDetailRepository.findAllByCustomerId(Long.parseLong(customerId), pageable);
 
         }
 
         else{
-            loanDetails = loanDetailRepository.findByIdAndCreatedBy(id,"sjain");
 
+            loanDetails = loanDetailRepository.findByLoanIdAndCustomerId(id,Long.parseLong(customerId));
         }
 
         return loanDetails;

@@ -33,7 +33,9 @@ public class LoanControllerTest extends AbstractTest{
     public void testAllAppliedLoanWithSuccessResponse() throws Exception {
         String uri = LOAN_ENDPOINT+"/view";
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(status().isOk()).andReturn();
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .header("Auth-User","1"))
+                .andExpect(status().isOk()).andReturn();
         String content = mvcResult.getResponse().getContentAsString();
         APIResponse apiResponse = mapFromJson(content,APIResponse.class);
         loanDetails = (List<LoanDetail>) apiResponse.getData();
@@ -46,6 +48,7 @@ public class LoanControllerTest extends AbstractTest{
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
                         .param("id","2")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header("Auth-User","1")
                 )
                 .andExpect(status().isOk()).andReturn();
         String content = mvcResult.getResponse().getContentAsString();
@@ -59,7 +62,9 @@ public class LoanControllerTest extends AbstractTest{
         String uri = LOAN_ENDPOINT+"/view";
         mvc.perform(MockMvcRequestBuilders.get(uri)
                          .param("id","833122")
-                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header("Auth-User","1")
+
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
                  )
                  .andExpect(status().isNotFound());
     }

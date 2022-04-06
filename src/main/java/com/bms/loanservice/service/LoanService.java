@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public interface LoanService {
 
-    List<LoanDetail> getLoans(Long id, int pageNo, int pageSize, String sortBy, String sortOrder);
+    List<LoanDetail> getLoans(Long id, int pageNo, int pageSize, String sortBy, String sortOrder,String customerId);
 
     List<LoanDetail> findAll();
 }

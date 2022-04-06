@@ -9,36 +9,33 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class LoanTypeMaster extends BaseEntity{
-	
+public class LoanTypeMaster {
+
+	public LoanTypeMaster() {
+	}
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
-	private int id;
-	
-	@Column(unique = true)
-	private String loanType;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	int loanTypeId;
 
-	public LoanTypeMaster(){}
 
-	public LoanTypeMaster(int id, String loanType) {
-		this.id = id;
-		this.loanType = loanType;
-	}
+	@Column
+	String loanType;
 
-	public LoanTypeMaster(String loanType) {
+	public LoanTypeMaster(int loanId, String loanType) {
 		super();
-//		this.loanId = loanId;
+		this.loanTypeId = loanId;
 		this.loanType = loanType;
 	}
 
 
-	public int getId() {
-		return id;
+	public int getLoanId() {
+		return loanTypeId;
 	}
 
 
-	public void setId(int loanId) {
-		this.id = loanId;
+	public void setLoanId(int loanId) {
+		this.loanTypeId = loanId;
 	}
 
 
@@ -50,11 +47,12 @@ public class LoanTypeMaster extends BaseEntity{
 	public void setLoanType(String loanType) {
 		this.loanType = loanType;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "LoanTypeMaster [id=" + id + ", loanType=" + loanType + "]";
+		return "LoanTypeMaster [loanTypeId=" + loanTypeId + ", loanType=" + loanType + "]";
 	}
+
 
 
 }
