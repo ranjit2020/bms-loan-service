@@ -27,16 +27,14 @@ public class LoanController {
 
 
     @GetMapping(
-            value = "/view",
-            consumes = {APPLICATION_JSON_VALUE},
-            produces = {APPLICATION_JSON_VALUE}
+            value = "/view"
     )
     public ResponseEntity<APIResponse> viewLoans(@RequestParam(name = "id",defaultValue = "0") Long id,
                                                  @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
                                                  @RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
                                                  @RequestParam(name = "sortBy", defaultValue = "loanId") String sortBy,
                                                  @RequestParam(name = "sortOrder", defaultValue = "desc") String sortOrder,
-                                                 @RequestHeader(name = "Auth-User") String customerId){
+                                                 @RequestHeader(name = "Auth-User", defaultValue = "0", required = false) String customerId){
 
         List<LoanDetail> loanDetails = loanService.getLoans(id,pageNo,pageSize,sortBy,sortOrder,customerId);
         if(loanDetails.isEmpty()){

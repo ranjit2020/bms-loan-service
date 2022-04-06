@@ -24,15 +24,12 @@ import java.util.List;
 @Component
 public class LoanServiceImpl implements LoanService {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private  LoanDetailRepository loanDetailRepository;
 
     @Autowired
     private  LoanTypeRepository loanTypeRepository;
-
-//    private static final String NAME = "sjain";
 
     public LoanServiceImpl() {
         super();
@@ -57,8 +54,8 @@ public class LoanServiceImpl implements LoanService {
     @Transactional(readOnly = true)
     public List<LoanDetail> getLoans(Long id, int pageNo, int pageSize, String sortBy, String sortOrder,String customerId) {
 
-        if (customerId==null){
-            throw new IllegalStateException("Illegal Access");
+        if (customerId==null || customerId.equals("0")){
+            throw new IllegalArgumentException("Illegal Access");
         }
 
         List<LoanDetail> loanDetails;

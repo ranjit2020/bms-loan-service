@@ -25,6 +25,15 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
                 .body(apiError);
     }
 
+    @ExceptionHandler(value = {IllegalArgumentException.class})
+    protected ResponseEntity<Object> handleIllegalAccessException(IllegalArgumentException ex){
+        apiError = new APIError(HttpStatus.UNAUTHORIZED.name(),HttpStatus.UNAUTHORIZED.value(),ex.getMessage());
+
+        return ResponseEntity.
+                status(apiError.getStatusCode())
+                .body(apiError);
+    }
+
     @Override
     protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
